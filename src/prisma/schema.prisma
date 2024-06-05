@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model todo {
+  id        Int      @id @default(autoincrement())
+  content   String
+  isDone      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model post {
+  id Int @id @default(autoincrement())
+  title String
+  content String
+  createdAt DateTime @default(now())
+  reply reply[]
+}
+
+model reply {
+  id Int @id @default(autoincrement())
+  replyContent String
+  createAt DateTime @default(now())
+  postId Int
+  post post @relation(fields: [postId], references: [id])
+}
