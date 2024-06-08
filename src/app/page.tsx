@@ -5,6 +5,7 @@ export default function page() {
   const menuItems = [
     { title: "ToDo 앱", path: "/todo" },
     { title: "카운터", path: "/counter" },
+    { title: "게시판", path: "/post" },
   ];
   return (
     <div className="flex flex-col justify-center items-center">

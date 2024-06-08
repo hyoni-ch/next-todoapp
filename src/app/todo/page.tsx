@@ -29,6 +29,21 @@ export default async function TodoPage() {
     }
   };
 
+  const handleDelete = async (postId: number) => {
+    'use server'
+    const result = await prisma?.todo.delete({
+      where: {
+        id: postId,
+      }
+    })
+
+    if (result) {
+      console.log("success");
+      revalidatePath("/todo");
+      return;
+    }
+  };
+
   return (
     <div className="p-4">
       <h1 className="text-3xl text-center">Todo</h1>
@@ -36,7 +51,7 @@ export default async function TodoPage() {
         <input type="text" name="content" placeholder="할 일을 입력해주세요" />
         <input type="submit" value="추가" />
       </form>
-      <TodoList todos={todoList} />
+      <TodoList todos={todoList} handleDelete={handleDelete} />
     </div>
   );
 }
