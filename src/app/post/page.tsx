@@ -9,10 +9,6 @@ export default async function postPage() {
     orderBy: { id: "desc" },
   });
 
-  // const replys = await prisma?.reply.findMany({
-  //   where: { post: { id: ?? }
-  // })
-
   const handlePostSubmit = async (formData: FormData) => {
     "use server";
     console.log("doing server action, here");
@@ -34,10 +30,8 @@ export default async function postPage() {
     }
   };
 
-  
-
   const handlePostUpdate = async (postId: number, formData: FormData) => {
-    'use server'
+    "use server";
 
     const title = formData.get("title-update") as string;
     const content = formData.get("content-update") as string;
@@ -48,9 +42,9 @@ export default async function postPage() {
       },
       data: {
         title,
-        content
-      }
-    })
+        content,
+      },
+    });
 
     if (result) {
       console.log("success");
@@ -60,12 +54,12 @@ export default async function postPage() {
   };
 
   const handlePostDelete = async (postId: number) => {
-    'use server'
+    "use server";
     const result = await prisma?.post.delete({
       where: {
         id: postId,
-      }
-    })
+      },
+    });
 
     if (result) {
       console.log("success");
@@ -74,9 +68,12 @@ export default async function postPage() {
     }
   };
 
-  const handleReplySubmit = async (postId: number, formData: FormData) => {
-    'use server'
+  const replys = await prisma?.reply.findMany({
+    orderBy: { id: "desc" },
+  });
 
+  const handleReplySubmit = async (postId: number, formData: FormData) => {
+    "use server";
     const content = formData.get("content-reply") as string;
 
     const result = await prisma?.reply.create({
@@ -93,17 +90,55 @@ export default async function postPage() {
       revalidatePath("/todo");
       return;
     }
+  };
 
-  }
+  const handleReplyUpdate = async (replyId: number, formData: FormData) => {
+    "use server";
+    const content = formData.get("content-reply-update") as string;
 
-  
+    const result = await prisma?.reply.update({
+      where: {
+        id: replyId,
+      },
+      data: {
+        replyContent: content,
+      },
+    });
 
+    if (result) {
+      console.log("success");
+      revalidatePath("/todo");
+      return;
+    }
+  };
+
+  const handleReplyDelete = async (replyId: number) => {
+    "use server";
+    const result = await prisma?.reply.delete({
+      where: {
+        id: replyId,
+      },
+    });
+
+    if (result) {
+      console.log("success");
+      revalidatePath("/todo");
+      return;
+    }
+  };
 
   return (
-    <div className='flex flex-col justify-center items-center'>
-      
+    <div className="flex flex-col justify-center items-center">
       <PostInput handlePostSubmit={handlePostSubmit} />
-      <PostList posts={posts} handlePostDelete={handlePostDelete} handlePostUpdate={handlePostUpdate} handleReplySubmit={handleReplySubmit} />
+      <PostList
+        posts={posts}
+        replys={replys}
+        handlePostDelete={handlePostDelete}
+        handlePostUpdate={handlePostUpdate}
+        handleReplySubmit={handleReplySubmit}
+        handleReplyDelete={handleReplyDelete}
+        handleReplyUpdate={handleReplyUpdate}
+      />
     </div>
   );
 }

@@ -29,7 +29,7 @@ model post {
 model reply {
   id Int @id @default(autoincrement())
   replyContent String
-  createAt DateTime @default(now())
+  createdAt DateTime @default(now())
   postId Int
-  post post @relation(fields: [postId], references: [id])
+  post post @relation(fields: [postId], references: [id], onDelete: Cascade)
 }
