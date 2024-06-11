@@ -55,7 +55,7 @@ export default function PostList({
 
   return (
     <>
-      <h1 className="text-3xl font-bold my-3">List</h1>
+      <h1 className="text-3xl font-bold my-3">리스트</h1>
       <div className="h-96 max-w-xs overflow-y-auto scrollbar-custom">
         {posts?.map((post) => (
           <div
@@ -66,17 +66,22 @@ export default function PostList({
             <div className="">{post.title}</div>
             <div className="text-2xl mt-3">내용</div>
             <div>{post.content}</div>
-            <div className="text-xs mt-2">
-              {post.createdAt.toLocaleString()}
+            <div className="text-xs mt-2 text-gray-600">
+              {post.createdAt.toLocaleString()} 작성됨
             </div>
-            <div className="mt-2">
+            <div className="float-right">
               <button
-                className="mr-1"
+                className="mr-1 hover:text-indigo-700"
                 onClick={() => handlePostUpdateOpen(post.id)}
               >
                 수정
               </button>
-              <button onClick={() => handlePostDelete(post.id)}>삭제</button>
+              <button
+                className="hover:text-red-600"
+                onClick={() => handlePostDelete(post.id)}
+              >
+                삭제
+              </button>
             </div>
             <div className="mt-4 text-2xl">댓글</div>
             {updateReplyId === null && (
@@ -94,10 +99,10 @@ export default function PostList({
                     <input
                       type="text"
                       name="content-reply"
-                      className="block rounded-md border-0 py-1 pl-5 pr-15 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-600 focus:ring-1 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="block rounded-md border-0 py-1 pl-3 pr-15 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-600 focus:ring-1 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6 w-full"
                       placeholder="댓글을 입력하세요"
                     />
-                    <button className="mx-1">확인</button>
+                    <button className="mx-1 min-w-8">확인</button>
                   </div>
                 </form>
               </>
@@ -106,20 +111,29 @@ export default function PostList({
               {replys?.map((reply) => (
                 <div key={reply.id}>
                   {reply.postId === post.id && (
-                    <div className="flex items-center">
-                      <div className="mx-1">{reply.replyContent}</div>
-                      <div className="text-xs mr-1">
-                        {reply.createdAt.toLocaleString()}
+                    <div className="flex flex-col">
+                      <div className="flex items-center">
+                        <div className="mx-1 w-full">{reply.replyContent}</div>
+                        <div className="flex justify-center items-center min-w-16 float-right">
+                          <button
+                            className="mr-1 text-sm hover:text-indigo-800"
+                            onClick={() => {
+                              handleReplyUpdateOpen(reply.id);
+                            }}
+                          >
+                            수정
+                          </button>
+                          <button
+                            className="text-sm hover:text-red-600"
+                            onClick={() => handleReplyDelete(reply.id)}
+                          >
+                            삭제
+                          </button>
+                        </div>
                       </div>
-                      <button
-                        className="mr-1 w-min"
-                        onClick={() => handleReplyUpdateOpen(reply.id)}
-                      >
-                        수정
-                      </button>
-                      <button onClick={() => handleReplyDelete(reply.id)}>
-                        삭제
-                      </button>
+                      <div className="text-xs float-right text-gray-600">
+                        {reply.createdAt.toLocaleString()} 작성됨
+                      </div>
                     </div>
                   )}
 

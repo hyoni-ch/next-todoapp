@@ -9,7 +9,7 @@ export default function PostInput({ handlePostSubmit }: Props) {
   return (
     <>
       {" "}
-      <h1 className="text-3xl font-bold my-3">게시판</h1>
+      <h1 className="text-3xl font-bold my-3">글쓰기</h1>
       <form action={handlePostSubmit} className="flex flex-col mb-5">
         <div>제목</div>
         <input
