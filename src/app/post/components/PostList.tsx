@@ -152,17 +152,19 @@ export default function PostList({
                       <input
                         type="text"
                         name="content-reply-update"
-                        className="block w-90 rounded-md border-0 py-1 pl-5 pr-15 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-600 focus:ring-1 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 "
+                        className="block rounded-md border-0 py-1 pl-3 pr-15 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-600 focus:ring-1 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6 w-full"
                         placeholder="수정할 댓글 내용을 입력하세요"
                       />
-                      <button className="mx-1">수정</button>
-                      <button
-                        type="button"
-                        onClick={() => handleReplyUpdateClose()}
-                        className=""
-                      >
-                        취소
-                      </button>
+                      <div className="flex justify-center items-center min-w-16 float-right">
+                        <button className="mx-1 text-sm">수정</button>
+                        <button
+                          type="button"
+                          onClick={() => handleReplyUpdateClose()}
+                          className="text-sm"
+                        >
+                          취소
+                        </button>
+                      </div>
                     </form>
                   )}
                 </div>
