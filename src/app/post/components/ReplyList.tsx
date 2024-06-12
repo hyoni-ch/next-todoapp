@@ -14,7 +14,7 @@ type Reply = {
 
 type PostProps = {
   posts: Post;
-  replys: Reply[] | undefined;
+  replys: Reply[];
   handleReplyDelete: (replyId: number) => void;
   handleReplyUpdate: (replyId: number, formData: FormData) => void;
 };

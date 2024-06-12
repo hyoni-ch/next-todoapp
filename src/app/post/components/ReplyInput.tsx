@@ -5,16 +5,8 @@ type Post = {
   id: number;
 };
 
-type Reply = {
-  id: number;
-  postId: number;
-  replyContent: string;
-  createdAt: Date | string | number;
-};
-
 type PostProps = {
   posts: Post;
-  replys: Reply[] | undefined;
   handleReplySubmit: (replyId: number, formData: FormData) => void;
 };
 

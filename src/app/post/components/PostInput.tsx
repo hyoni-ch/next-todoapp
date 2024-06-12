@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Link from "next/link";
 
 type Props = {
   handlePostSubmit: (formData: FormData) => void;
@@ -26,6 +27,11 @@ export default function PostInput({ handlePostSubmit }: Props) {
         <button className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 leading-6 text-white shadow-sm hover:bg-indigo-500 my-2">
           등록
         </button>
+        <Link className="inline-block" href={`/post`}>
+          <button className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 leading-6 text-white shadow-sm hover:bg-indigo-500 my-2">
+            취소
+          </button>
+        </Link>
       </form>
     </>
   );

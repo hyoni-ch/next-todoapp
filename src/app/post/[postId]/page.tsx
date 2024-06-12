@@ -58,9 +58,7 @@ export default async function postIdPage({
     }
   };
 
-  const replys = await prisma?.reply.findMany({
-    orderBy: { id: "desc" },
-  });
+  const replys = await prisma?.reply.findMany({});
 
   const handleReplySubmit = async (postId: number, formData: FormData) => {
     "use server";
@@ -136,7 +134,6 @@ export default async function postIdPage({
       />
       <ReplyInput
         posts={posts || { id: 0 }}
-        replys={replys}
         handleReplySubmit={handleReplySubmit}
       />
       <ReplyList
