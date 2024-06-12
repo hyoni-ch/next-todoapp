@@ -1,34 +1,8 @@
 import React from "react";
-import { revalidatePath } from "next/cache";
-import prisma from "@/prisma/prisma";
 import Link from "next/link";
+import { handlePostSubmit } from "@/app/actions/postAction";
 
 export default function createPage() {
-  const handlePostSubmit = async (formData: FormData) => {
-    "use server";
-    console.log("doing server action, here");
-
-    const title = formData.get("title") as string;
-    const content = formData.get("content") as string;
-
-    if (!title || !content) {
-      return;
-    }
-
-    const result = await prisma?.post.create({
-      data: {
-        title,
-        content,
-      },
-    });
-
-    if (result) {
-      console.log("success");
-      revalidatePath("/post");
-      return;
-    }
-  };
-
   return (
     <div>
       <h1 className="text-3xl font-bold my-3">글쓰기</h1>

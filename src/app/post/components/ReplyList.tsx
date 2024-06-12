@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { handleReplyDelete, handleReplyUpdate } from "@/app/actions/postAction";
 
 type Post = {
   id: number;
@@ -15,16 +16,9 @@ type Reply = {
 type PostProps = {
   posts: Post;
   replys: Reply[];
-  handleReplyDelete: (replyId: number) => void;
-  handleReplyUpdate: (replyId: number, formData: FormData) => void;
 };
 
-export default function ReplyList({
-  posts,
-  replys,
-  handleReplyDelete,
-  handleReplyUpdate,
-}: PostProps) {
+export default function ReplyList({ posts, replys }: PostProps) {
   const [updateReplyId, setUpdateReplyId] = useState<number | null>(null);
 
   const handleReplyUpdateOpen = (replyId: number) => {

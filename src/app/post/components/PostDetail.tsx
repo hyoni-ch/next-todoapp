@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
+import { handlePostDelete, handlePostUpdate } from "@/app/actions/postAction";
 
 type Post = {
   id: number;
@@ -11,19 +12,9 @@ type Post = {
 
 type PostProps = {
   posts: Post | null | undefined;
-
-  handlePostDelete: (postId: number) => void;
-  handleReplyDelete: (replyId: number) => void;
-  handlePostUpdate: (postId: number, formData: FormData) => void;
-  handleReplyUpdate: (replyId: number, formData: FormData) => void;
 };
 
-export default function PostDetail({
-  posts,
-
-  handlePostDelete,
-  handlePostUpdate,
-}: PostProps) {
+export default function PostDetail({ posts }: PostProps) {
   const [updatePostId, setUpdatePostId] = useState<number | null>(null);
 
   const handlePostUpdateOpen = (postId: number) => {

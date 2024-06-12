@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { handleReplySubmit } from "@/app/actions/postAction";
 
 type Post = {
   id: number;
@@ -7,10 +8,9 @@ type Post = {
 
 type PostProps = {
   posts: Post;
-  handleReplySubmit: (replyId: number, formData: FormData) => void;
 };
 
-export default function ReplyInput({ posts, handleReplySubmit }: PostProps) {
+export default function ReplyInput({ posts }: PostProps) {
   return (
     <>
       <div className="mt-4">댓글</div>
