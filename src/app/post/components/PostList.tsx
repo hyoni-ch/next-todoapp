@@ -1,4 +1,3 @@
-"use client";
 import Link from "next/link";
 
 type Post = {
@@ -14,24 +13,20 @@ type PostProps = {
 
 export default function PostList({ posts }: PostProps) {
   return (
-    <table className="border-collapse">
-      <thead>
-        <tr className="">
-          <th className="">제목</th>
-          <th className="">날짜</th>
-        </tr>
-      </thead>
-      <tbody>
-        {posts &&
-          posts?.map((post) => (
-            <tr key={post.id} className="">
-              <Link href={`/post/${post.id}`}>
-                <td className="">{post.title}</td>
-                <td className="">{post.createdAt.toLocaleString()}</td>
-              </Link>
-            </tr>
-          ))}
-      </tbody>
-    </table>
+    <div className="flex flex-col">
+      <ul className="flex">
+        <li className="">제목</li>
+        <li className="">날짜</li>
+      </ul>
+
+      {posts?.map((post) => (
+        <ul key={post.id} className="flex">
+          <li className="">
+            <Link href={`/post/${post.id}`}>{post.title}</Link>
+          </li>
+          <li className="">{post.createdAt.toLocaleString()}</li>
+        </ul>
+      ))}
+    </div>
   );
 }

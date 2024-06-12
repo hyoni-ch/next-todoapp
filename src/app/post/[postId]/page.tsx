@@ -1,5 +1,7 @@
 import React from "react";
 import PostDetail from "../components/PostDetail";
+import ReplyInput from "../components/ReplyInput";
+import ReplyList from "../components/ReplyList";
 import { revalidatePath } from "next/cache";
 import prisma from "@/prisma/prisma";
 
@@ -112,14 +114,26 @@ export default async function postIdPage({
   };
 
   return (
-    <PostDetail
-      posts={posts}
-      replys={replys}
-      handlePostDelete={handlePostDelete}
-      handleReplyDelete={handleReplyDelete}
-      handlePostUpdate={handlePostUpdate}
-      handleReplyUpdate={handleReplyUpdate}
-      handleReplySubmit={handleReplySubmit}
-    />
+    <>
+      <PostDetail
+        posts={posts}
+        replys={replys}
+        handlePostDelete={handlePostDelete}
+        handleReplyDelete={handleReplyDelete}
+        handlePostUpdate={handlePostUpdate}
+        handleReplyUpdate={handleReplyUpdate}
+      />
+      <ReplyInput
+        posts={posts}
+        replys={replys}
+        handleReplySubmit={handleReplySubmit}
+      />
+      <ReplyList
+        posts={posts}
+        replys={replys}
+        handleReplyDelete={handleReplyDelete}
+        handleReplyUpdate={handleReplyUpdate}
+      />
+    </>
   );
 }
