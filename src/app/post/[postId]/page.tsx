@@ -129,19 +129,18 @@ export default async function postIdPage({
     <>
       <PostDetail
         posts={posts}
-        replys={replys}
         handlePostDelete={handlePostDelete}
         handleReplyDelete={handleReplyDelete}
         handlePostUpdate={handlePostUpdate}
         handleReplyUpdate={handleReplyUpdate}
       />
       <ReplyInput
-        posts={posts}
+        posts={posts || { id: 0 }}
         replys={replys}
         handleReplySubmit={handleReplySubmit}
       />
       <ReplyList
-        posts={posts}
+        posts={posts || { id: 0 }}
         replys={replys}
         handleReplyDelete={handleReplyDelete}
         handleReplyUpdate={handleReplyUpdate}
