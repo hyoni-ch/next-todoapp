@@ -22,6 +22,10 @@ export default async function postIdPage({
     const title = formData.get("title-update") as string;
     const content = formData.get("content-update") as string;
 
+    if (!title || !content) {
+      return;
+    }
+
     const result = await prisma?.post.update({
       where: {
         id: postId,
@@ -62,6 +66,10 @@ export default async function postIdPage({
     "use server";
     const content = formData.get("content-reply") as string;
 
+    if (!content) {
+      return;
+    }
+
     const result = await prisma?.reply.create({
       data: {
         replyContent: content,
@@ -81,6 +89,10 @@ export default async function postIdPage({
   const handleReplyUpdate = async (replyId: number, formData: FormData) => {
     "use server";
     const content = formData.get("content-reply-update") as string;
+
+    if (!content) {
+      return;
+    }
 
     const result = await prisma?.reply.update({
       where: {

@@ -8,16 +8,9 @@ type Post = {
   createdAt: Date | string | number;
 };
 
-type Reply = {
-  id: number;
-  postId: number;
-  replyContent: string;
-  createdAt: Date | string | number;
-};
-
 type PostProps = {
   posts: Post | null | undefined;
-  replys: Reply[] | undefined;
+
   handlePostDelete: (postId: number) => void;
   handleReplyDelete: (replyId: number) => void;
   handlePostUpdate: (postId: number, formData: FormData) => void;
@@ -26,7 +19,7 @@ type PostProps = {
 
 export default function PostDetail({
   posts,
-  replys,
+
   handlePostDelete,
   handlePostUpdate,
 }: PostProps) {

@@ -11,6 +11,10 @@ export default function createPage() {
     const title = formData.get("title") as string;
     const content = formData.get("content") as string;
 
+    if (!title || !content) {
+      return;
+    }
+
     const result = await prisma?.post.create({
       data: {
         title,
