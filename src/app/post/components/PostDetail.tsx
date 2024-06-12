@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Link from "next/link";
 
 type Post = {
   id: number;
@@ -36,8 +37,8 @@ export default function PostDetail({
   if (!posts) return null;
 
   return (
-    <div className="flex flex-col justify-center">
-      <div className="max-w-screen-md">
+    <div className="flex flex-col">
+      <div className="">
         <div className="text-2xl">제목</div>
         <div className="">{posts.title}</div>
         <div className="text-2xl mt-3">내용</div>
@@ -47,22 +48,28 @@ export default function PostDetail({
         </div>
 
         <div className="float-right">
-          <button
-            className="mr-1 hover:text-indigo-700"
-            onClick={() => handlePostUpdateOpen(posts.id)}
-          >
-            수정
-          </button>
-          <button
-            className="hover:text-red-600"
-            onClick={() => {
-              if (confirm("정말 삭제하시겠습니까?")) {
-                handlePostDelete(posts.id);
-              }
-            }}
-          >
-            삭제
-          </button>
+          <div>
+            <button
+              className="mr-1 hover:text-indigo-700"
+              onClick={() => handlePostUpdateOpen(posts.id)}
+            >
+              수정
+            </button>
+            <button
+              className="hover:text-red-600"
+              onClick={() => {
+                if (confirm("정말 삭제하시겠습니까?")) {
+                  handlePostDelete(posts.id);
+                }
+              }}
+            >
+              삭제
+            </button>
+          </div>
+
+          <Link className="float-right" href={`/post`}>
+            <button>목록</button>
+          </Link>
         </div>
 
         {updatePostId === posts.id && (

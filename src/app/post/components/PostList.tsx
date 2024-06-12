@@ -13,7 +13,8 @@ type PostProps = {
 
 export default function PostList({ posts }: PostProps) {
   return (
-    <div className="flex flex-col">
+    <div className="">
+      <h1>게시판</h1>
       <ul className="flex">
         <li className="">제목</li>
         <li className="">날짜</li>

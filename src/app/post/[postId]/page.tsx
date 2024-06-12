@@ -80,6 +80,7 @@ export default async function postIdPage({
     if (result) {
       console.log("success");
       revalidatePath("/todo");
+
       return;
     }
   };
