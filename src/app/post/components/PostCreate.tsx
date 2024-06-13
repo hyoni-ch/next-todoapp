@@ -10,16 +10,14 @@ export default function PostCreate({
 }) {
   const isPostId = params ? parseInt(params.postId) : false;
 
-  const formRef = React.useRef<HTMLFormElement>(null);
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(formRef.current!);
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
 
     if (!isPostId) {
-      const result = await handlePostSubmit(formData);
+      await handlePostSubmit(formData);
     } else {
-      const result = await handlePostUpdate(isPostId, formData);
+      await handlePostUpdate(isPostId, formData);
     }
   };
 
