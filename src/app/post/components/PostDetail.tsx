@@ -23,7 +23,7 @@ export default function PostDetail({ post }: PostProps) {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="">
       <div className="">
         <div className="text-2xl">제목</div>
         <div className="">{post.title}</div>
@@ -33,8 +33,8 @@ export default function PostDetail({ post }: PostProps) {
           {post.createdAt.toLocaleString()} 작성됨
         </div>
 
-        <div className="float-right">
-          <div>
+        <div className="">
+          <div className="flex justify-end">
             <button className="mr-1 hover:text-indigo-700">
               <Link href={`/post/${post.id}/update`}>수정</Link>
             </button>
@@ -52,9 +52,13 @@ export default function PostDetail({ post }: PostProps) {
             </button>
           </div>
 
-          <Link className="float-right" href={`/post`}>
-            <button>목록</button>
-          </Link>
+          <div className="flex justify-end">
+            <button className="">
+              <Link className="block w-full" href={`/post`}>
+                목록
+              </Link>
+            </button>
+          </div>
         </div>
       </div>
     </div>

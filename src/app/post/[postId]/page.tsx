@@ -15,7 +15,7 @@ export default async function postIdPage({
   const replys = await getReply();
 
   return (
-    <div className="max-w-screen-md">
+    <div className="flex flex-col max-w-screen-md rounded-md border p-10 m-10 mx-auto">
       <PostDetail post={post} />
       <ReplyInput post={post} />
       <ReplyList post={post} replys={replys} />
