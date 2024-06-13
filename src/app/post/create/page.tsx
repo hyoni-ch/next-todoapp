@@ -1,5 +1,4 @@
 import React from "react";
-import { getUniquePosts } from "@/app/actions/postAction";
 import PostCreate from "@/app/post/components/PostCreate";
 
 export default async function createPage() {

@@ -1,25 +1,50 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { handlePostSubmit, handlePostUpdate } from "@/app/actions/postAction";
+import { newPost, postUpdate, postUpsert } from "@/app/actions/postAction";
+import { useRouter } from "next/navigation";
 
 export default function PostCreate({
   params,
 }: {
   params?: { postId: string };
 }) {
-  const isPostId = params ? parseInt(params.postId) : false;
+  const isPostId = params ? parseInt(params.postId) : null;
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
 
     if (!isPostId) {
-      await handlePostSubmit(formData);
+      const result = await newPost(formData);
+      if (result) {
+        alert("게시글 등록에 성공했습니다.");
+        router.replace("/post");
+      } else {
+        alert("게시글 등록에 실패했습니다.");
+      }
     } else {
-      await handlePostUpdate(isPostId, formData);
+      await postUpdate(isPostId, formData);
     }
   };
+
+  //   const result = await postUpsert(isPostId, formData);
+  //   if (result) {
+  //     if (isPostId) {
+  //       alert("게시글 수정에 성공했습니다.");
+  //     } else {
+  //       alert("게시글 등록에 성공했습니다.");
+  //     }
+  //     router.replace("/post");
+  //   } else {
+  //     if (isPostId) {
+  //       alert("게시글 수정에 실패했습니다.");
+  //     } else {
+  //       alert("게시글 등록에 실패했습니다.");
+  //     }
+  //   }
+  // };
 
   return (
     <div>

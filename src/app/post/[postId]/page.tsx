@@ -15,10 +15,10 @@ export default async function postIdPage({
   const replys = await getReply();
 
   return (
-    <>
+    <div className="max-w-screen-md">
       <PostDetail post={post} />
       <ReplyInput post={post} />
       <ReplyList post={post} replys={replys} />
-    </>
+    </div>
   );
 }

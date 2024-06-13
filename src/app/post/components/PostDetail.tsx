@@ -1,7 +1,8 @@
 "use client";
 import React, { useEffect } from "react";
 import Link from "next/link";
-import { handlePostDelete } from "@/app/actions/postAction";
+import { postDelete } from "@/app/actions/postAction";
+import { useRouter } from "next/navigation";
 
 type Post = {
   id: number;
@@ -15,12 +16,14 @@ type PostProps = {
 };
 
 export default function PostDetail({ post }: PostProps) {
+  const router = useRouter();
+
   if (!post) {
     return <div>게시물을 찾을 수 없습니다.</div>;
   }
 
   return (
-    <div className="flex flex-col max-w-screen">
+    <div className="flex flex-col">
       <div className="">
         <div className="text-2xl">제목</div>
         <div className="">{post.title}</div>
@@ -39,7 +42,9 @@ export default function PostDetail({ post }: PostProps) {
               className="hover:text-red-600"
               onClick={() => {
                 if (confirm("정말 삭제하시겠습니까?")) {
-                  handlePostDelete(post.id);
+                  postDelete(post.id);
+                  alert("삭제가 완료되었습니다");
+                  router.replace("/post");
                 }
               }}
             >
