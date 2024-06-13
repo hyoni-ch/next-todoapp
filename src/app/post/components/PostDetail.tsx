@@ -32,7 +32,7 @@ export default function PostDetail({ post }: PostProps) {
         <div className="float-right">
           <div>
             <button className="mr-1 hover:text-indigo-700">
-              <Link href={`/post/create`}>수정</Link>
+              <Link href={`/post/${post.id}/update`}>수정</Link>
             </button>
             <button
               className="hover:text-red-600"
