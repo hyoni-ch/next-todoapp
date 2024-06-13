@@ -7,10 +7,12 @@ export default async function postPage() {
       <h1 className="w-full bg-blue-500 h-12 text-white text-2xl pl-10 pt-1.5">
         Home
       </h1>
-      <div className="flex flex-col border p-5 mt-10">
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ">
-          <Link href={`/post/create`}>글쓰기</Link>
-        </button>
+      <div className="flex flex-col border rounded-md p-7 mt-10">
+        <div className="">
+          <button className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded w-fit float-right">
+            <Link href={`/post/create`}>글쓰기</Link>
+          </button>
+        </div>
 
         <PostList />
       </div>
