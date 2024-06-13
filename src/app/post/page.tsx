@@ -8,8 +8,8 @@ export default async function postPage() {
         Home
       </h1>
       <div className="flex flex-col border rounded-md p-7 mt-10">
-        <div className="">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded w-fit float-right">
+        <div className="flex justify-end">
+          <button className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded w-fit ">
             <Link href={`/post/create`}>글쓰기</Link>
           </button>
         </div>
