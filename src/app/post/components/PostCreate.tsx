@@ -1,7 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { newPost, postUpdate, postUpsert } from "@/app/actions/postAction";
+import {
+  newPost,
+  getUniquePosts,
+  postUpdate,
+  postUpsert,
+} from "@/app/actions/postAction";
 import { useRouter } from "next/navigation";
 
 export default function PostCreate({
@@ -12,12 +17,32 @@ export default function PostCreate({
   const isPostId = params ? parseInt(params.postId) : null;
   const router = useRouter();
 
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
+  useEffect(() => {
+    if (isPostId) {
+      const fetchPostContent = async () => {
+        const post = await getUniquePosts(isPostId);
+        if (post) {
+          setTitle(post.title);
+          setContent(post.content);
+        } else {
+          alert("게시글을 불러오는데 실패했습니다");
+        }
+      };
+
+      fetchPostContent();
+    }
+  }, [isPostId]);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
 
     if (!isPostId) {
       const result = await newPost(formData);
+
       if (result) {
         alert("게시글 등록에 성공했습니다.");
         router.replace("/post");
@@ -56,18 +81,22 @@ export default function PostCreate({
         <input
           type="text"
           name="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
           className="block w-full rounded-md py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
           placeholder="제목을 입력하세요"
         />
         <div>내용</div>
         <textarea
           name="content"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
           className="block w-full rounded-md py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 "
           placeholder="내용을 입력하세요"
         />
         <div className="flex justify-around mt-2">
           <button className="w-1/3 rounded-md bg-indigo-600 px-3 py-1.5 leading-6 text-white shadow-sm hover:bg-indigo-500">
-            등록
+            {isPostId ? "수정" : "등록"}
           </button>
 
           <button className="w-1/3 rounded-md bg-indigo-600 px-3 py-1.5 leading-6 text-white shadow-sm hover:bg-indigo-500">
