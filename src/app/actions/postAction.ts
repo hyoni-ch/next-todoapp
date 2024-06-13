@@ -1,7 +1,8 @@
+"use server";
 import { revalidatePath } from "next/cache";
 import prisma from "@/prisma/prisma";
 
-export const handlePostSubmit = async (formData: FormData) => {
+export async function handlePostSubmit(formData: FormData) {
   console.log("doing server action, here");
 
   const title = formData.get("title") as string;
@@ -23,9 +24,9 @@ export const handlePostSubmit = async (formData: FormData) => {
     revalidatePath("/post");
     return;
   }
-};
+}
 
-export const handlePostUpdate = async (postId: number, formData: FormData) => {
+export async function handlePostUpdate(postId: number, formData: FormData) {
   const title = formData.get("title-update") as string;
   const content = formData.get("content-update") as string;
 
@@ -48,9 +49,9 @@ export const handlePostUpdate = async (postId: number, formData: FormData) => {
     revalidatePath("/todo");
     return;
   }
-};
+}
 
-export const handlePostDelete = async (postId: number) => {
+export async function handlePostDelete(postId: number) {
   const result = await prisma?.post.delete({
     where: {
       id: postId,
@@ -62,9 +63,9 @@ export const handlePostDelete = async (postId: number) => {
     revalidatePath("/todo");
     return;
   }
-};
+}
 
-export const handleReplySubmit = async (postId: number, formData: FormData) => {
+export async function handleReplySubmit(postId: number, formData: FormData) {
   const content = formData.get("content-reply") as string;
 
   if (!content) {
@@ -86,12 +87,9 @@ export const handleReplySubmit = async (postId: number, formData: FormData) => {
 
     return;
   }
-};
+}
 
-export const handleReplyUpdate = async (
-  replyId: number,
-  formData: FormData
-) => {
+export async function handleReplyUpdate(replyId: number, formData: FormData) {
   const content = formData.get("content-reply-update") as string;
 
   if (!content) {
@@ -112,9 +110,9 @@ export const handleReplyUpdate = async (
     revalidatePath("/todo");
     return;
   }
-};
+}
 
-export const handleReplyDelete = async (replyId: number) => {
+export async function handleReplyDelete(replyId: number) {
   const result = await prisma?.reply.delete({
     where: {
       id: replyId,
@@ -126,4 +124,4 @@ export const handleReplyDelete = async (replyId: number) => {
     revalidatePath("/todo");
     return;
   }
-};
+}
