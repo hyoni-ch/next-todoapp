@@ -1,6 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { handleReplyDelete, handleReplyUpdate } from "@/app/actions/postAction";
+import {
+  handleReplyDelete,
+  handleReplyUpdate,
+} from "@/app/actions/replyAction";
 
 type Post = {
   id: number;
@@ -14,11 +17,15 @@ type Reply = {
 };
 
 type PostProps = {
-  posts: Post;
+  post: Post | null;
   replys: Reply[];
 };
 
-export default function ReplyList({ posts, replys }: PostProps) {
+export default function ReplyList({ post, replys }: PostProps) {
+  if (!post) {
+    return <div>게시물을 찾을 수 없습니다.</div>;
+  }
+
   const [updateReplyId, setUpdateReplyId] = useState<number | null>(null);
 
   const handleReplyUpdateOpen = (replyId: number) => {
@@ -33,7 +40,7 @@ export default function ReplyList({ posts, replys }: PostProps) {
       <div>
         {replys?.map((reply) => (
           <div key={reply.id}>
-            {reply.postId === posts.id && (
+            {reply.postId === post.id && (
               <div className="flex flex-col">
                 <div className="flex items-center">
                   <div className="mx-1 w-full">{reply.replyContent}</div>

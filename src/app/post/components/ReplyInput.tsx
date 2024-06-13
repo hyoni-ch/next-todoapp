@@ -1,26 +1,26 @@
 "use client";
 import React from "react";
-import { handleReplySubmit } from "@/app/actions/postAction";
+import { handleReplySubmit } from "@/app/actions/replyAction";
 
 type Post = {
   id: number;
 };
 
 type PostProps = {
-  posts: Post;
+  post: Post | null;
 };
 
-export default function ReplyInput({ posts }: PostProps) {
+export default function ReplyInput({ post }: PostProps) {
+  if (!post) {
+    return <div>게시물을 찾을 수 없습니다.</div>;
+  }
   return (
     <>
       <div className="mt-4">댓글</div>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          handleReplySubmit(
-            posts.id,
-            new FormData(e.target as HTMLFormElement)
-          );
+          handleReplySubmit(post.id, new FormData(e.target as HTMLFormElement));
         }}
       >
         <div className="flex items-center">

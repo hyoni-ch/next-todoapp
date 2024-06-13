@@ -1,13 +1,7 @@
-import prisma from "@/prisma/prisma";
-
 import PostList from "./components/PostList";
 import Link from "next/link";
 
 export default async function postPage() {
-  const posts = await prisma?.post.findMany({
-    orderBy: { id: "desc" },
-  });
-
   return (
     <div className="flex flex-col justify-center items-center">
       <h1 className="w-full bg-blue-500 h-12 text-white text-2xl pl-10 pt-1.5">
@@ -18,7 +12,7 @@ export default async function postPage() {
           <Link href={`/post/create`}>글쓰기</Link>
         </button>
 
-        <PostList posts={posts} />
+        <PostList />
       </div>
     </div>
   );

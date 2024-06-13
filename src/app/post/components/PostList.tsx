@@ -1,17 +1,9 @@
 import Link from "next/link";
+import { getAllPosts } from "@/app/actions/postAction";
 
-type Post = {
-  id: number;
-  title: string;
-  content: string;
-  createdAt: Date | string | number;
-};
+export default async function PostList() {
+  const posts = await getAllPosts();
 
-type PostProps = {
-  posts: Post[] | undefined;
-};
-
-export default function PostList({ posts }: PostProps) {
   return (
     <div className="">
       <h1>게시판</h1>
