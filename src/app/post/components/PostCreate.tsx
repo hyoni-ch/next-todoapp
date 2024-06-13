@@ -15,40 +15,11 @@ export default function PostCreate({
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(formRef.current!);
-    const title = formData.get("title") as string;
-    const content = formData.get("content") as string;
-
-    const postData = {
-      title,
-      content,
-    };
-
-    if (!title || !content) {
-      alert("제목와 내용을 입력하세요.");
-      return;
-    }
 
     if (!isPostId) {
-      // createPost
-      const result = await handlePostSubmit(postData);
-
-      if (!result) {
-        alert("게시판 작성에 실패했습니다.");
-        return;
-      } else {
-        formRef.current?.reset();
-        window.location.href = "/post";
-      }
+      const result = await handlePostSubmit(formData);
     } else {
-      // updatePost
-      const result = await handlePostUpdate(isPostId, postData);
-      if (!result) {
-        alert("게시판 작성에 실패했습니다.");
-        return;
-      } else {
-        formRef.current?.reset();
-        window.location.href = "/post/" + isPostId;
-      }
+      const result = await handlePostUpdate(isPostId, formData);
     }
   };
 
