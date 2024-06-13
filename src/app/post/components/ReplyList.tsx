@@ -41,7 +41,7 @@ export default function ReplyList({ post, replys }: PostProps) {
         {replys?.map((reply) => (
           <div key={reply.id}>
             {reply.postId === post.id && (
-              <div className="flex flex-col">
+              <div className="flex flex-col mt-2">
                 <div className="flex items-center">
                   <div className="mx-1 w-full">{reply.replyContent}</div>
                   <div className="flex justify-center items-center min-w-16 float-right">
