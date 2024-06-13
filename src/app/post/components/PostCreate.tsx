@@ -23,7 +23,9 @@ export default function PostCreate({
 
   return (
     <div>
-      <h1 className="text-3xl font-bold my-3">글쓰기</h1>
+      <h1 className="text-3xl font-bold my-3">
+        {isPostId ? "수정하기" : "글쓰기"}
+      </h1>
       <form onSubmit={handleSubmit} className="flex flex-col mb-5">
         <div>제목</div>
         <input

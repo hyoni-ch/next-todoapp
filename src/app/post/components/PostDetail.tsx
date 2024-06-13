@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { handlePostDelete } from "@/app/actions/postAction";
 
@@ -18,8 +18,9 @@ export default function PostDetail({ post }: PostProps) {
   if (!post) {
     return <div>게시물을 찾을 수 없습니다.</div>;
   }
+
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col max-w-screen">
       <div className="">
         <div className="text-2xl">제목</div>
         <div className="">{post.title}</div>
