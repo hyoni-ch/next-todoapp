@@ -21,8 +21,6 @@ export async function getUniquePosts(postId: number) {
 }
 
 export async function handlePostSubmit(formData: FormData) {
-  console.log("doing server action, here");
-
   const title = formData.get("title") as string;
   const content = formData.get("content") as string;
 
@@ -45,8 +43,8 @@ export async function handlePostSubmit(formData: FormData) {
 }
 
 export async function handlePostUpdate(postId: number, formData: FormData) {
-  const title = formData.get("title-update") as string;
-  const content = formData.get("content-update") as string;
+  const title = formData.get("title") as string;
+  const content = formData.get("content") as string;
 
   if (!title || !content) {
     return;

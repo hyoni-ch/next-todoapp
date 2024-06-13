@@ -14,7 +14,7 @@ type PostProps = {
   post: Post | null;
 };
 
-export default async function PostDetail({ post }: PostProps) {
+export default function PostDetail({ post }: PostProps) {
   if (!post) {
     return <div>게시물을 찾을 수 없습니다.</div>;
   }
@@ -31,7 +31,9 @@ export default async function PostDetail({ post }: PostProps) {
 
         <div className="float-right">
           <div>
-            <button className="mr-1 hover:text-indigo-700">수정</button>
+            <button className="mr-1 hover:text-indigo-700">
+              <Link href={`/post/create`}>수정</Link>
+            </button>
             <button
               className="hover:text-red-600"
               onClick={() => {
