@@ -28,7 +28,7 @@ export default function PostDetail({ post }: PostProps) {
         <div className="text-2xl">제목</div>
         <div className="">{post.title}</div>
         <div className="text-2xl mt-3">내용</div>
-        <div>{post.content}</div>
+        <div className="whitespace-pre-line">{post.content}</div>
         <div className="text-xs mt-2 text-gray-600">
           {post.createdAt.toLocaleString()} 작성됨
         </div>

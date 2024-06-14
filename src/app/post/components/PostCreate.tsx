@@ -95,11 +95,11 @@ export default function PostCreate({
           placeholder="내용을 입력하세요"
         />
         <div className="flex justify-around mt-2">
-          <button className="w-1/3 rounded-md bg-indigo-600 px-3 py-1.5 leading-6 text-white shadow-sm hover:bg-indigo-500">
+          <button className="w-1/3 rounded-md bg-indigo-600 leading-6 text-white shadow-sm hover:bg-indigo-500">
             {isPostId ? "수정" : "등록"}
           </button>
 
-          <button className="w-1/3 rounded-md bg-indigo-600 px-3 py-1.5 leading-6 text-white shadow-sm hover:bg-indigo-500">
+          <button className="w-1/3 rounded-md bg-indigo-600  leading-6 text-white shadow-sm hover:bg-indigo-500">
             <Link href={"/post"} className="block w-full">
               취소
             </Link>
